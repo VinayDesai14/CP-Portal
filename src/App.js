@@ -1,24 +1,34 @@
 import logo from './logo.svg';
 import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import Navbar from './Components/Navbar';
+import Layout from './Components/Layout';
+import Home from './Components/Home';
+import ToDoList from './Components/ToDoList';
+import CodeForces from './Components/Contests/CodeForces';
+import CodeChef from './Components/Contests/CodeChef';
+import AtCoder from './Components/Contests/AtCoder';
+import LoginSignUp from './Components/LoginSignUp';
+import SendPasswordResetEmail from './Components/SendPasswordResetEmail';
+import ResetPassword from './Components/ResetPassword';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+      <Route path='/' element={<Layout/>} >
+        <Route index element={<Home/>}/>
+        <Route path='todolist' element={<ToDoList/>}/>
+        <Route path='contests/codeforces' element={<CodeForces/>}/>
+        <Route path='contests/codechef' element={<CodeChef/>}/>
+        <Route path='contests/atcoder' element={<AtCoder/>}/>
+        <Route path='loginorsignup' element={<LoginSignUp/>}/>
+      </Route>
+      <Route path='/sendpasswordresetemail' element={<SendPasswordResetEmail/>}/>
+      <Route path='/resetpassword' element={<ResetPassword/>}/>
+    </Routes>
+    </>
+    
   );
 }
 
