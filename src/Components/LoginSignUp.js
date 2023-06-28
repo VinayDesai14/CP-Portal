@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import {Grid,Card,Typography,Tabs,Tab,Box} from '@mui/material';
 import Pic1 from '../Images/Pic1.png';

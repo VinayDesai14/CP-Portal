@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -46,14 +47,14 @@ function Home() {
   return (
     <>
      <Box sx={{mx:7,mt:4}}>
-    <Typography variant="h3" sx={{color:'blue'}} >UpComing Contests in this Week...</Typography>
+    <Typography variant="h3" sx={{color:'green'}} >Upcoming Contests</Typography>
     <br />
      
      <UpcomingContests/>
       
      <br /><br />
 
-     <Typography variant="h4" sx={{color:'green'}} >Practice Problems...</Typography>
+     <Typography variant="h4" sx={{color:'green'}} >Practice Problems</Typography>
       
       <br />
      <Practice/>
