@@ -10,7 +10,7 @@ import Paper from '@mui/material/Paper';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
+   backgroundColor:theme.palette.common.black,
     color: theme.palette.common.white,
   },
   [`&.${tableCellClasses.body}`]: {
@@ -21,6 +21,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover,
+    color: theme.palette.common.white,
   },
   // hide last border
   '&:last-child td, &:last-child th': {
@@ -43,9 +44,9 @@ function UpcomingContests() {
   return (
     <>
       <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }}>
-        <TableHead>
-          <TableRow>
+      <Table sx={{ minWidth: 700 , backgroundImage:'linear-gradient(to right, #b2bcbe, #8eb3b7, #5dc4c4, #28c8b5, #36e5b6)'}}>
+        <TableHead >
+          <TableRow >
             <StyledTableCell>Name</StyledTableCell>
             <StyledTableCell align="center">Platform</StyledTableCell>
             <StyledTableCell align="center">Date</StyledTableCell>

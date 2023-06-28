@@ -3,20 +3,21 @@ import React from 'react'
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import { Link } from 'react-router-dom';
 
 function Practice() {
     return (
         <>
             <Box>
-                <Stack direction="row" spacing={2}>
+                <Stack direction="row" spacing={140}>
                     <Box>
                       <Box>
-                        <Link to='https://codeforces.com/problemset/problem/1841/A'></Link>
+                        <Link to='https://codeforces.com/problemset'>problemset</Link>
                       </Box>
                     </Box>
-
                     <Box>
                         <FormGroup>
+                        <h3>Difficulty:</h3>
                             <FormControlLabel  control={<Checkbox defaultChecked />} label="800-1000" />
                             <FormControlLabel  control={<Checkbox />} label="1000-1200" />
                             <FormControlLabel  control={<Checkbox />} label="1200-1400" />
