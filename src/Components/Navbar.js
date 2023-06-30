@@ -16,7 +16,7 @@ function Navbar() {
   return (
     <>
     <Box sx={{ flexGrow: 1,px:7,padding:'0px'}}>
-      <AppBar  position="static" color="primary" sx={{backgroundImage:'linear-gradient(to right, #70aeb5, #31cdcd, #00b9a2, #12ebb2)'}} >
+      <AppBar  position="static" color="primary" sx={{backgroundImage:'linear-gradient(to right, #434343 0%, black 100%);'}} >
         <Toolbar sx={{spacing:10}}>
             
            <img src={logo} alt='logo' height='55px'  style={{paddingRight:'30px'
