@@ -21,7 +21,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover,
-    color: theme.palette.common.white,
   },
   // hide last border
   '&:last-child td, &:last-child th': {
@@ -44,7 +43,7 @@ function UpcomingContests() {
   return (
     <>
       <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 , backgroundImage:'linear-gradient(to right, #b2bcbe, #8eb3b7, #5dc4c4, #28c8b5, #36e5b6)'}}>
+      <Table sx={{ minWidth: 700 , backgroundImage:'linear-gradient(to right, #70aeb5, #31cdcd, #00b9a2, #12ebb2)'}}>
         <TableHead >
           <TableRow >
             <StyledTableCell>Name</StyledTableCell>

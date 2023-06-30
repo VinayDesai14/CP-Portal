@@ -46,19 +46,7 @@ const rows = [
 function Home() {
   return (
     <>
-     <Box sx={{mx:7,mt:4}}>
-    <Typography variant="h3" sx={{color:'green'}} >Upcoming Contests</Typography>
-    <br />
-     
-     <UpcomingContests/>
-      
-     <br /><br />
-
-     <Typography variant="h4" sx={{color:'green'}} >Practice Problems</Typography>
-      
-      <br />
-     <Practice/>
-    </Box>
+    
     </>
   )
 }
