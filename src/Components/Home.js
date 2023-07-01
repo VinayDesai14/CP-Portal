@@ -9,7 +9,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Box, Typography } from '@mui/material';
-import UpcomingContests from './HomeComponents/UpcomingContests';
+import UpcomingContests from './Contests';
 import Practice from './HomeComponents/Practice';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -46,19 +46,7 @@ const rows = [
 function Home() {
   return (
     <>
-     <Box sx={{mx:7,mt:4}}>
-    <Typography variant="h3" sx={{color:'green'}} >Upcoming Contests</Typography>
-    <br />
-     
-     <UpcomingContests/>
-      
-     <br /><br />
-
-     <Typography variant="h4" sx={{color:'green'}} >Practice Problems</Typography>
-      
-      <br />
-     <Practice/>
-    </Box>
+    
     </>
   )
 }

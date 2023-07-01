@@ -12,6 +12,7 @@ import AtCoder from './Components/Contests/AtCoder';
 import LoginSignUp from './Components/LoginSignUp';
 import SendPasswordResetEmail from './Components/SendPasswordResetEmail';
 import ResetPassword from './Components/ResetPassword';
+import Contests from './Components/Contests';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path='contests/codechef' element={<CodeChef/>}/>
         <Route path='contests/atcoder' element={<AtCoder/>}/>
         <Route path='loginorsignup' element={<LoginSignUp/>}/>
+        <Route path='contests' element ={<Contests/>} />
       </Route>
       <Route path='/sendpasswordresetemail' element={<SendPasswordResetEmail/>}/>
       <Route path='/resetpassword' element={<ResetPassword/>}/>

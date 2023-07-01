@@ -1,18 +1,38 @@
-import { Box, Stack } from '@mui/material'
+/* eslint-disable no-unused-vars */
+import { Box, Stack, TableRow } from '@mui/material'
 import React from 'react'
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { Link } from 'react-router-dom';
+import { Component } from 'react';
 
-function Practice() {
-    return (
-        <>
+class Practice extends Component{
+    constructor(){
+        super();
+        this.state={
+            problems:this.problems,
+            loading:false
+        }
+    }
+   async componentDidMount(){
+       let data = await fetch('https://codeforces.com/api/problemset.problems')
+        let parData=await data.json();
+        this.setState({problems:parData.problems});
+    }
+    render() {
+        return(
             <Box>
                 <Stack direction="row" spacing={140}>
                     <Box>
                       <Box>
-                        <Link to='https://codeforces.com/problemset'>problemset</Link>
+                      {this.state.problems?.map((Element)=>{
+                        return <div key={Element.url}>
+                           <problems name={Element.name}/>
+                        </div>
+                      }
+                      )
+                      }
                       </Box>
                     </Box>
                     <Box>
@@ -29,8 +49,10 @@ function Practice() {
                 </Stack>
 
             </Box>
-        </>
-    )
+        
+        )
+    }
+
 }
 
 export default Practice

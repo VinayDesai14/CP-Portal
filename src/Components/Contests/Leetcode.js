@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { styled} from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -34,18 +34,17 @@ function createData(name, platform,date,time,duration) {
 }
 
 const rows = [
-  createData('Starter 97', 'Codechef', '05/July/2023', '20:00', '2'),
-  createData('Starter 98', 'Codechef', '12/July/2023', '20:00', '2'),
-  createData('Starter 99', 'Codechef', '19/July/2023', '20:00', '2'),
-  createData('Starter 100', 'Codechef', '26/July/2023', '20:00', '2'),
+  createData('Weekly Contest 352', 'Leetcode', '02/July/2023','08:00','1:30'),
+  createData('Biweekly Contest 108', 'Leetcode', '08/July/2023','20:00','1:30'),
 ];
 
-function CodeChef() {
+function Leetcode() {
   return (
     <>
-    <h3 style={{color:'white',marginTop:'30px',marginLeft:"90px"}}>Codechef</h3>
-      <TableContainer component={Paper} sx={{width:"90%",margin:"auto"}}>
-      <Table sx={{ width:"100%" }}aria-label="customized table">
+    <h3 style={{color:'white',marginTop:'30px',marginLeft:"90px"}}>Leetcode</h3>
+    
+      <TableContainer component={Paper} sx={{width:"90%",margin:"auto"}} >
+      <Table sx={{width:"100%"}}aria-label="customized table" >
         <TableHead >
           <TableRow >
             <StyledTableCell>Name</StyledTableCell>
@@ -58,10 +57,10 @@ function CodeChef() {
         <TableBody>
           {rows.map((row) => (
             <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row" >
-                <a href='https://www.codechef.com/contests?itm_medium=navmenu&itm_campaign=allcontests'style={{textDecoration:'none',color:'black',paddingRight:'180px'}} >{row.name}</a>
+              <StyledTableCell component="th" scope="row">
+              <a href='https://codeforces.com/contests'style={{textDecoration:'none',color:'black',paddingRight:'140px'}}>{row.name}</a>
               </StyledTableCell>
-              <StyledTableCell align="center"  >{row.platform}</StyledTableCell>
+              <StyledTableCell align="center" >{row.platform}</StyledTableCell>
               <StyledTableCell align="center">{row.date}</StyledTableCell>
               <StyledTableCell align="center">{row.time}</StyledTableCell>
               <StyledTableCell align="center">{row.duration} hrs</StyledTableCell>
@@ -74,4 +73,4 @@ function CodeChef() {
   )
 }
 
-export default CodeChef
+export default Leetcode

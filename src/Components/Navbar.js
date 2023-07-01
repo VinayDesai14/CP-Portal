@@ -15,34 +15,22 @@ function Navbar() {
    
   return (
     <>
-    <Box sx={{ flexGrow: 1,px:7}}>
-      <AppBar  position="static" color="primary" >
+    <Box sx={{ flexGrow: 1,px:7,padding:'0px'}}>
+      <AppBar  position="static" color="primary" sx={{backgroundImage:'linear-gradient(to right, #434343 0%, black 100%);'}} >
         <Toolbar sx={{spacing:10}}>
             
-           <img src={logo} alt='logo' height='55px'  style={{paddingRight:'20px'
+           <img src={logo} alt='logo' height='55px'  style={{paddingRight:'30px'
           }} />
            
-          <Button component={NavLink} to='/' style={({ isActive }) => { return { backgroundColor: isActive ? '#6d1b7b' : '' } }} sx={{ color: 'white', textTransform: 'none' }}>Home</Button>
+          <Button className='home' component={NavLink} to='/' style={({ isActive }) => { return { backgroundColor: isActive ? '' : '' } }} sx={{ color: 'white', textTransform: 'none', paddingRight:'20px',}}>Home</Button>
 
-          <Button component={NavLink} to='/todolist' style={({ isActive }) => { return { backgroundColor: isActive ? '#6d1b7b' : '' } }} sx={{ color: 'white', textTransform: 'none' }}>ToDoList</Button>
-            
-           <PopupState variant="popover" popupId="demo-popup-menu">
-  {(popupState) => (
-    <React.Fragment>
-      <Button sx={{ color: 'white', textTransform: 'none' }} {...bindTrigger(popupState)}>
-       Contests
-       <KeyboardArrowDownIcon/>
-      </Button>
-      <Menu {...bindMenu(popupState)}>
-      <MenuItem onClick={popupState.close}><Link to='/contests/codeforces' style={{textDecoration:'none'}}>CodeForces</Link></MenuItem>
-            <MenuItem onClick={popupState.close}><Link to='/contests/codechef' style={{textDecoration:'none'}}>CodeChef</Link></MenuItem>
-            <MenuItem onClick={popupState.close}><Link to='/contests/atcoder' style={{textDecoration:'none'}}>AtCoder</Link></MenuItem>
-      </Menu>
-    </React.Fragment>
-  )}
-</PopupState>
+          <Button component={NavLink} to='/todolist' style={({ isActive }) => { return { backgroundColor: isActive ? '' : '' } }} sx={{ color: 'white', textTransform: 'none', paddingRight:'20px' }} className='dim pointer'>ToDoList</Button>
 
-          <Button   component={NavLink} to='/loginorsignup' style={({ isActive }) => { return { backgroundColor: isActive ? '#6d1b7b' : '' } }} sx={{ color: 'white', textTransform: 'none',marginLeft:'auto'}}>Login/SignUp</Button>
+          <Button component={NavLink} to='/contests' style={({ isActive }) => { return { backgroundColor: isActive ? '' : '' } }} sx={{ color: 'white', textTransform: 'none',paddingRight:'20px' }} className='dim pointer'>Contests</Button>
+
+          <Button component={NavLink} to='/todolist' style={({ isActive }) => { return { backgroundColor: isActive ? '' : '' } }} sx={{ color: 'white', textTransform: 'none' , paddingRight:'20px'}} className='dim pointer'>Favorite</Button>
+
+          <Button   component={NavLink} to='/loginorsignup' style={({ isActive }) => { return { backgroundColor: isActive ? '' : '' } }} sx={{ color: 'white', textTransform: 'none',marginLeft:'auto',textDecoration:'underline'}} className='dim pointer'>Login/SignUp</Button>
 
         </Toolbar>
       </AppBar>
