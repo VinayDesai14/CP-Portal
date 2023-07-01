@@ -43,7 +43,7 @@ function UpcomingContests() {
   return (
     <>
       <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }}>
+      <Table sx={{ minWidth: 700, backgroundImage:'linear-gradient(to right, #b2bcbe, #8eb3b7, #5dc4c4, #28c8b5, #36e5b6)'}}>
         <TableHead>
           <TableRow>
             <StyledTableCell>Name</StyledTableCell>

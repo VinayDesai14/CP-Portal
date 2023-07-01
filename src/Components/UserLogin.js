@@ -18,7 +18,6 @@ const UserLogin = () => {
     if (actualData.email && actualData.password) {
       console.log(actualData);
 
-      document.getElementById('login-form').reset()
       setError({ status: true, msg: "Login Success", type: 'success' })
       navigate('/')
     } else {
@@ -26,7 +25,7 @@ const UserLogin = () => {
     }
   }
   return <>
-    <Box component='form' noValidate sx={{ mt: 1 }} id='login-form' onSubmit={handleSubmit}>
+    <Box component='form'  sx={{ mt: 1 }} id='login-form' onSubmit={handleSubmit}>
       <TextField margin='normal' required fullWidth id='email' name='email' label='Email Address' />
       <TextField margin='normal' required fullWidth id='password' name='password' label='Password' type='password' />
       <Box textAlign='center'>

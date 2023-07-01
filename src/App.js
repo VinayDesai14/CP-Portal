@@ -5,12 +5,10 @@ import Navbar from './Components/Navbar';
 import Layout from './Components/Layout';
 import Home from './Components/Home';
 import ToDoList from './Components/ToDoList';
-import CodeForces from './Components/Contests/CodeForces';
-import CodeChef from './Components/Contests/CodeChef';
-import AtCoder from './Components/Contests/AtCoder';
 import LoginSignUp from './Components/LoginSignUp';
 import SendPasswordResetEmail from './Components/SendPasswordResetEmail';
 import ResetPassword from './Components/ResetPassword';
+import Contests from './Components/Contests';
 
 function App() {
   return (
@@ -19,9 +17,7 @@ function App() {
       <Route path='/' element={<Layout/>} >
         <Route index element={<Home/>}/>
         <Route path='todolist' element={<ToDoList/>}/>
-        <Route path='contests/codeforces' element={<CodeForces/>}/>
-        <Route path='contests/codechef' element={<CodeChef/>}/>
-        <Route path='contests/atcoder' element={<AtCoder/>}/>
+        <Route path='contests' element={<Contests/>}/>
         <Route path='loginorsignup' element={<LoginSignUp/>}/>
       </Route>
       <Route path='/sendpasswordresetemail' element={<SendPasswordResetEmail/>}/>

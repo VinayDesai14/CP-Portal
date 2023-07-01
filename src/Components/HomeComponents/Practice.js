@@ -1,32 +1,73 @@
-import { Box, Stack } from '@mui/material'
+import { Box, Stack, Typography } from '@mui/material'
 import React from 'react'
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import BinarySearch from '../Topics/BinarySearch';
+import BitMasks from '../Topics/BitMasks';
+import Defaults from '../Topics/Defaults';
+import Dp from '../Topics/Dp';
+import Sorting from '../Topics/Sorting';
+import Greedy from '../Topics/Greedy';
+import Strings from '../Topics/Strings';
+import Trees from '../Topics/Trees';
+import Graphs from '../Topics/Graphs';
+import TwoPointers from '../Topics/TwoPointers';
+import Math from '../Topics/Math';
 
 function Practice() {
+   
+    const [topic, setTopic] = React.useState('');
+
+  const handleChange = (event) => {
+    setTopic(event.target.value);
+  };
+
+
     return (
         <>
             <Box>
-                <Stack direction="row" spacing={2}>
-                    <Box>
-                      <Box>
-                        <Link to='https://codeforces.com/problemset/problem/1841/A'></Link>
-                      </Box>
-                    </Box>
-
-                    <Box>
-                        <FormGroup>
-                            <FormControlLabel  control={<Checkbox defaultChecked />} label="800-1000" />
-                            <FormControlLabel  control={<Checkbox />} label="1000-1200" />
-                            <FormControlLabel  control={<Checkbox />} label="1200-1400" />
-                            <FormControlLabel  control={<Checkbox />} label="1400-1600" />
-                            <FormControlLabel  control={<Checkbox />} label="1600-1800" />
-                            <FormControlLabel  control={<Checkbox />} label="1800-2000" />
-                        </FormGroup>
-                    </Box>
-                </Stack>
-
+            <Stack direction='row' spacing={7}>
+            <Typography variant="h3" sx={{color:'green'}} >Practice Problems...</Typography>
+            <FormControl sx={{ m: 1, minWidth: 80 }}>
+        <InputLabel id="demo-simple-select-autowidth-label">Topic</InputLabel>
+        <Select
+          labelId="demo-simple-select-autowidth-label"
+          id="demo-simple-select-autowidth"
+          value={topic}
+          onChange={handleChange}
+          autoWidth
+          label="Topic"
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value="BinarySearch">Binary Search</MenuItem>
+          <MenuItem value="BitMasks">Bit masks </MenuItem>
+          <MenuItem value="Dp">Dp</MenuItem>
+          <MenuItem value="Graphs">Graphs</MenuItem>
+          <MenuItem value="Greedy">Greedy</MenuItem>
+          <MenuItem value="Math">Math</MenuItem>
+          <MenuItem value="Strings">Strings</MenuItem>
+          <MenuItem value="Sorting">Sorting</MenuItem>
+          <MenuItem value="Trees">Trees</MenuItem>
+          <MenuItem value="TwoPointers">Two Pointers</MenuItem>
+        </Select>
+      </FormControl>
+      </Stack>
+         
+        {topic===''?<Defaults/>:null}
+         {topic==='BinarySearch'?<BinarySearch/>:null}
+         {topic==='BitMasks'?<BitMasks/>:null}
+         {topic==='Dp'?<Dp/>:null}
+         {topic==='Graphs'?<Graphs/>:null}
+         {topic==='Greedy'?<Greedy/>:null}
+         {topic==='Math'?<Math/>:null}
+         {topic==='Strings'?<Strings/>:null}
+         {topic==='Sorting'?<Sorting/>:null}
+         {topic==='Trees'?<Trees/>:null}
+         {topic==='TwoPointers'?<TwoPointers/>:null}
             </Box>
         </>
     )

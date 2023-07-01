@@ -23,7 +23,7 @@ function UserSignUp() {
         if (actualData.name && actualData.email && actualData.password && actualData.password_confirmation) {
           if (actualData.password === actualData.password_confirmation) {
             console.log(actualData);
-            document.getElementById('registration-form').reset()
+    
             setError({ status: true, msg: "Registration Successful", type: 'success' })
             navigate('/')
           } else {
@@ -34,7 +34,7 @@ function UserSignUp() {
         }
       }
       return <>
-        <Box component='form' noValidate sx={{ mt: 1 }} id='registration-form' onSubmit={handleSubmit}>
+        <Box component='form'  sx={{ mt: 1 }} id='registration-form' onSubmit={handleSubmit}>
           <TextField margin='normal' required fullWidth id='name' name='name' label='Name' />
           <TextField margin='normal' required fullWidth id='email' name='email' label='Email Address' />
           <TextField margin='normal' required fullWidth id='password' name='password' label='Password' type='password' />
