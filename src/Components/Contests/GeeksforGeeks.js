@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -33,17 +34,17 @@ function createData(name, platform,date,time,duration) {
 }
 
 const rows = [
-  createData('Educational Codeforces Round 151 (Rated for Div. 2)', 'CodeForces', '29/Jun/2023', '20:05', '2'),
-  createData('Starters 96', 'CodeChef', '28/Jun/2023','20:00','2'),
-  createData('AtCoder Beginner Contest 308', 'AtCoder', '1/Jul/2023', '17:30', '1:40'),
+  createData('GFG Weekly Coding Contest - 109', 'GFG', '02/July/2023','07:00','1:30'),
+  createData('GFG Weekly Coding Contest - 109', 'GFG', '08/July/2023','07:00','1:30'),
 ];
 
-
-function UpcomingContests() {
+function GeeksforGeeks() {
   return (
     <>
-      <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 , backgroundImage:'linear-gradient(to right, #70aeb5, #31cdcd, #00b9a2, #12ebb2)'}}>
+    <h3 style={{color:'white',marginTop:'30px',marginLeft:"90px"}}>GeeksforGeeks</h3>
+    
+      <TableContainer component={Paper} sx={{width:"90%",margin:"auto"}} >
+      <Table sx={{width:"100%"}}aria-label="customized table" >
         <TableHead >
           <TableRow >
             <StyledTableCell>Name</StyledTableCell>
@@ -57,9 +58,10 @@ function UpcomingContests() {
           {rows.map((row) => (
             <StyledTableRow key={row.name}>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+              <a href='https://practice.geeksforgeeks.org/events/rec/gfg-weekly-coding-contest?utm_source=geeksforgeeks&utm_medium=main_header&utm_campaign=contests'
+              style={{textDecoration:'none',color:'black',paddingRight:'60px'}}>{row.name}</a>
               </StyledTableCell>
-              <StyledTableCell align="center">{row.platform}</StyledTableCell>
+              <StyledTableCell align="center" >{row.platform}</StyledTableCell>
               <StyledTableCell align="center">{row.date}</StyledTableCell>
               <StyledTableCell align="center">{row.time}</StyledTableCell>
               <StyledTableCell align="center">{row.duration} hrs</StyledTableCell>
@@ -72,4 +74,4 @@ function UpcomingContests() {
   )
 }
 
-export default UpcomingContests
+export default GeeksforGeeks

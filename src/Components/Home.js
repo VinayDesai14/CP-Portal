@@ -9,7 +9,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Box, Typography } from '@mui/material';
-import UpcomingContests from './HomeComponents/UpcomingContests';
+import UpcomingContests from './Contests';
 import Practice from './HomeComponents/Practice';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
