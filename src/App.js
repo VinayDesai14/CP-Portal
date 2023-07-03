@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import logo from './logo.svg';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
@@ -19,6 +20,7 @@ function App() {
         <Route path='todolist' element={<ToDoList/>}/>
         <Route path='contests' element={<Contests/>}/>
         <Route path='loginorsignup' element={<LoginSignUp/>}/>
+        <Route path='contests' element ={<Contests/>} />
       </Route>
       <Route path='/sendpasswordresetemail' element={<SendPasswordResetEmail/>}/>
       <Route path='/resetpassword' element={<ResetPassword/>}/>

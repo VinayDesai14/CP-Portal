@@ -68,9 +68,7 @@ function Practice() {
          {topic==='Sorting'?<Sorting/>:null}
          {topic==='Trees'?<Trees/>:null}
          {topic==='TwoPointers'?<TwoPointers/>:null}
-            </Box>
-        </>
-    )
-}
-
+        </Box>
+    </>
+)}
 export default Practice

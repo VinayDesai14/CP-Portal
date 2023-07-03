@@ -1,10 +1,12 @@
 import React from 'react'
 
+
 function Contests() {
   return (
-    <div>
-    
-    </div>
+    <>
+    <h1>hi</h1>
+    </>
+
   )
 }
 
