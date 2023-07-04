@@ -10,32 +10,32 @@ import { alignProperty } from '@mui/material/styles/cssUtils';
 
 function Navbar() {
 
-  const [flag, setFlag] = useState(false);
+   const [flag,setFlag]=useState(false);
 
    
   return (
     <>
+    <Box sx={{ flexGrow: 1,px:7,padding:'0px'}}>
+      <AppBar  position="static" color="primary" sx={{backgroundImage:'linear-gradient(to right, #434343 0%, black 100%);'}} >
+        <Toolbar sx={{spacing:10}}>
+            
+           <img src={logo} alt='logo' height='55px'  style={{paddingRight:'30px'
+          }} />
+           
+          <Button className='home' component={NavLink} to='/' style={({ isActive }) => { return { backgroundColor: isActive ? '' : '' } }} sx={{ color: 'white', textTransform: 'none', paddingRight:'20px',fontFamily:"'Girassol', cursive",fontSize:18}}>Home</Button>
 
-      <Box sx={{ flexGrow: 1, px: 7 }}>
+          <Button component={NavLink} to='/todolist' style={({ isActive }) => { return { backgroundColor: isActive ? '' : '' } }} sx={{ color: 'white', textTransform: 'none', paddingRight:'20px',fontFamily:"'Girassol', cursive",fontSize:18 }} className='dim pointer'>ToDoList</Button>
 
-        <AppBar position="static" color="secondary">
+          <Button component={NavLink} to='/contests' style={({ isActive }) => { return { backgroundColor: isActive ? '' : '' } }} sx={{ color: 'white', textTransform: 'none',paddingRight:'20px',fontFamily:"'Girassol', cursive" ,fontSize:18}} className='dim pointer'>Contests</Button>
 
-          <Toolbar sx={{ spacing: 5 }}>
+          <Button component={NavLink} to='/todolist' style={({ isActive }) => { return { backgroundColor: isActive ? '' : '' } }} sx={{ color: 'white', textTransform: 'none' , paddingRight:'20px',fontFamily:"'Girassol', cursive",fontSize:18}} className='dim pointer'>Favorite</Button>
 
-            <Button component={NavLink} to='/' style={({ isActive }) => { return { backgroundColor: isActive ? '#6d1b7b' : '' } }} sx={{ color: 'white', textTransform: 'none' }}>Home</Button>
+          <Button   component={NavLink} to='/loginorsignup' style={({ isActive }) => { return { backgroundColor: isActive ? '' : '' } }} sx={{ color: 'white', textTransform: 'none',marginLeft:'auto',textDecoration:'underline',fontFamily:"'Girassol', cursive",fontSize:18}} className='dim pointer'>Login/SignUp</Button>
 
-
-
-            <Button component={NavLink} to='/todolist' style={({ isActive }) => { return { backgroundColor: isActive ? '#6d1b7b' : '' } }} sx={{ color: 'white', textTransform: 'none' }}>ToDoList</Button>
-
-            <Button component={NavLink} to='/contests' style={({ isActive }) => { return { backgroundColor: isActive ? '#6d1b7b' : '' } }} sx={{ color: 'white', textTransform: 'none' }}>Contests</Button>
-
-            <Button component={NavLink} to='/loginorsignup' style={({ isActive }) => { return { backgroundColor: isActive ? '#6d1b7b' : '' } }} sx={{ color: 'white', textTransform: 'none', marginLeft: 'auto' }}>Login/SignUp</Button>
-
-          </Toolbar>
-        </AppBar>
-      </Box>
-    </>
+        </Toolbar>
+      </AppBar>
+    </Box>
+  </>
   )
 }
 

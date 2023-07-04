@@ -27,11 +27,11 @@ function Practice() {
 
     return (
         <>
-            <Box>
+            <Box sx={{color:'white'}}>
             <Stack direction='row' spacing={7}>
-            <Typography variant="h3" sx={{color:'green'}} >Practice Problems...</Typography>
-            <FormControl sx={{ m: 1, minWidth: 80 }}>
-        <InputLabel id="demo-simple-select-autowidth-label">Topic</InputLabel>
+            <Typography variant="h4" sx={{color:'white',fontFamily:"'Girassol', cursive"}} >Practice Problems</Typography>
+            <FormControl sx={{ m: 1, minWidth: 80 ,color:'white'}}>
+        <InputLabel id="demo-simple-select-autowidth-label" sx={{color:'white'}}>Topic</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
@@ -45,7 +45,7 @@ function Practice() {
           </MenuItem>
           <MenuItem value="BinarySearch">Binary Search</MenuItem>
           <MenuItem value="BitMasks">Bit masks </MenuItem>
-          <MenuItem value="Dp">Dp</MenuItem>
+          <MenuItem value="Dp">DP</MenuItem>
           <MenuItem value="Graphs">Graphs</MenuItem>
           <MenuItem value="Greedy">Greedy</MenuItem>
           <MenuItem value="Math">Math</MenuItem>
