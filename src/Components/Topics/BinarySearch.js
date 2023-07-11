@@ -1,10 +1,12 @@
-import { Box, Button, Grid, Stack, Typography } from '@mui/material'
+import { Box, Button, Grid, Pagination, Stack, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 import TurnedInNotIcon from '@mui/icons-material/TurnedInNot';
 
 function BinarySearch() {
-
+  
+  const [cnt,setCnt]=useState(0);
+  const [page, setPage] = useState(1);
   const url = "https://codeforces.com/api/problemset.problems?tags=binary%20search";
   const [problemset, setProblemsset] = useState([]);
   const btnProps = {
@@ -17,15 +19,16 @@ function BinarySearch() {
   }
   useEffect(() => {
     Axios.get(url).then((response) => {
-      setProblemsset(response.data.result.problems);
+      const start=(page-1)*15;
+      const end=(page)*15;
+      setCnt(response.data.result.problems.length);
+      setProblemsset((response.data.result.problems).slice(start,end));
     }).catch((err) => {
       console.log(err);
     })
 
-  }, [])
+  }, [page])
 
-  //  console.log(problemset.contestId);
-  //  const problemLink=`https://codeforces.com/problemset/problem/${problemset.problems.contestId}`
   return (
     <>
 
@@ -44,23 +47,22 @@ function BinarySearch() {
               <Grid item lg={1} md={1} sm={2} xs={2} sx={{mt:2}}>
                 <TurnedInNotIcon />
               </Grid>
+              <Pagination/>
             </Grid>
-
+            
 
           )
         })
       }
-      {/* <Box key={idx} sx={{border:2,mt:2,height:100,display:'flex'}}>
-              
-              <Typography component='span' variant='h5' >{name}</Typography>
-              
-              <Box component='span' sx={{float:'right',display:'flex',alignItems:'center'}}>
 
-              <Button href={`https://codeforces.com/problemset/problem/${contestId}/${index}`} sx={btnProps} target='_blank'>Solve Problem</Button>
-
-              <BookmarkIcon/>
-              </Box>
-            </Box> */}
+      <Pagination
+       sx={{mt:4,display:'flex',alignItems:'center',justifyContent:'center',mb:2}}
+            count={Math.ceil(cnt/15)}
+            color="primary" 
+            size='large'
+            onChange={(e, value) => setPage(value)}
+          />
+            
     </>
   )
 }

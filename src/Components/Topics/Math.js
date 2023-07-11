@@ -1,9 +1,12 @@
-import {  Button, Grid, Typography } from '@mui/material'
+import {  Button, Grid, Pagination, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 import TurnedInNotIcon from '@mui/icons-material/TurnedInNot';
 
 function Math() {
+
+  const [cnt,setCnt]=useState(0);
+  const [page, setPage] = useState(1);
   const url = "https://codeforces.com/api/problemset.problems?tags=math";
   const [problemset, setProblemsset] = useState([]);
   const btnProps = {
@@ -16,12 +19,15 @@ function Math() {
   }
   useEffect(() => {
     Axios.get(url).then((response) => {
-      setProblemsset(response.data.result.problems);
+      const start=(page-1)*15;
+      const end=(page)*15;
+      setCnt(response.data.result.problems.length);
+      setProblemsset((response.data.result.problems).slice(start,end));
     }).catch((err) => {
       console.log(err);
     })
 
-  }, [])
+  }, [page])
 
   return (
     <>
@@ -43,6 +49,13 @@ function Math() {
         )
       })
     }
+    <Pagination
+       sx={{mt:4,display:'flex',alignItems:'center',justifyContent:'center',mb:2}}
+            count={Math.ceil(cnt/15)}
+            color="primary" 
+            size='large'
+            onChange={(e, value) => setPage(value)}
+          />
   </>
   )
 }
