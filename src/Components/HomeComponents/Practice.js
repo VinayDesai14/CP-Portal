@@ -29,11 +29,11 @@ function Practice() {
 
     return (
         <>
-            <Box>
+            <Box sx={{color:'white'}}>
             <Stack direction='row' spacing={7}>
-            <Typography variant="h3" sx={{color:'green'}} >Practice Problems...</Typography>
-            <FormControl sx={{ m: 1, minWidth: 80 }}>
-        <InputLabel id="demo-simple-select-autowidth-label">Topic</InputLabel>
+            <Typography variant="h4" sx={{color:'white',fontFamily:"'Girassol', cursive"}} >Practice Problems</Typography>
+            <FormControl sx={{ m: 1, minWidth: 80 ,color:'white'}}>
+        <InputLabel id="demo-simple-select-autowidth-label" sx={{color:'white'}}>Topic</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
@@ -45,6 +45,7 @@ function Practice() {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
+<<<<<<< HEAD
           <MenuItem value="binary%20search">Binary Search</MenuItem>
           <MenuItem value="bitmasks">Bit masks </MenuItem>
           <MenuItem value="dp">Dp</MenuItem>
@@ -55,6 +56,18 @@ function Practice() {
           <MenuItem value="sortings">Sorting</MenuItem>
           <MenuItem value="trees">Trees</MenuItem>
           <MenuItem value="two%20pointers">Two Pointers</MenuItem>
+=======
+          <MenuItem value="BinarySearch">Binary Search</MenuItem>
+          <MenuItem value="BitMasks">Bit masks </MenuItem>
+          <MenuItem value="Dp">DP</MenuItem>
+          <MenuItem value="Graphs">Graphs</MenuItem>
+          <MenuItem value="Greedy">Greedy</MenuItem>
+          <MenuItem value="Math">Math</MenuItem>
+          <MenuItem value="Strings">Strings</MenuItem>
+          <MenuItem value="Sorting">Sorting</MenuItem>
+          <MenuItem value="Trees">Trees</MenuItem>
+          <MenuItem value="TwoPointers">Two Pointers</MenuItem>
+>>>>>>> ea95597497a0a4a2ffff8f5ca7e3958457ac845a
         </Select>
         
       </FormControl>

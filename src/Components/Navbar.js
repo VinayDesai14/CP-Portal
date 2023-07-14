@@ -4,6 +4,7 @@ import { AppBar, Box, Toolbar, Button,Avatar} from '@mui/material'
 import React, { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import logo from './logo.ico';
+<<<<<<< HEAD
 import { useAuth0 } from "@auth0/auth0-react";
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -33,6 +34,19 @@ function Navbar() {
   return (
     <>
     <Box sx={{ flexGrow: 1,px:7,padding:'0px',mt:1}}>
+=======
+import { alignProperty } from '@mui/material/styles/cssUtils';
+import { useAuth0 } from "@auth0/auth0-react";
+
+function Navbar() {
+
+   const [flag,setFlag]=useState(false);
+   const {user, loginWithRedirect, isAuthenticated, logout} = useAuth0();
+   
+  return (
+    <>
+    <Box sx={{ flexGrow: 1,px:7,padding:'0px'}}>
+>>>>>>> ea95597497a0a4a2ffff8f5ca7e3958457ac845a
       <AppBar  position="static" color="primary" sx={{backgroundImage:'linear-gradient(to right, #434343 0%, black 100%);'}} >
         <Toolbar sx={{spacing:10}}>
             
@@ -41,6 +55,7 @@ function Navbar() {
            
           <Button className='home' component={NavLink} to='/' style={({ isActive }) => { return { backgroundColor: isActive ? '' : '' } }} sx={{ color: 'white', textTransform: 'none', paddingRight:'20px',fontFamily:"'Girassol', cursive",fontSize:18}}>Home</Button>
 
+<<<<<<< HEAD
         
           <Button component={NavLink} to='/todolist' style={({ isActive }) => { return { backgroundColor: isActive ? '' : '' } }} sx={{ color: 'white', textTransform: 'none' , paddingRight:'20px',fontFamily:"'Girassol', cursive",fontSize:18}} className='dim pointer'>ToDoList</Button>
           
@@ -85,6 +100,24 @@ function Navbar() {
           <Box sx={{display:'flex',justifyContent: 'flex-end',width:'100%'}}>
             <Button sx={btnProps} onClick={() => loginWithRedirect()} className='dim pointer'>Log In</Button>
             </Box>
+=======
+          {isAuthenticated ? (
+          <Button component={NavLink} to='/todolist' style={({ isActive }) => { return { backgroundColor: isActive ? '' : '' } }} sx={{ color: 'white', textTransform: 'none' , paddingRight:'20px',fontFamily:"'Girassol', cursive",fontSize:18}} className='dim pointer'>ToDoList</Button>
+          ):
+            <button onClick={() => loginWithRedirect()}>ToDoList</button>
+          }
+          <Button component={NavLink} to='/contests' style={({ isActive }) => { return { backgroundColor: isActive ? '' : '' } }} sx={{ color: 'white', textTransform: 'none',paddingRight:'20px',fontFamily:"'Girassol', cursive" ,fontSize:18}} className='dim pointer'>Contests</Button>
+
+          <Button component={NavLink} to='/todolist' style={({ isActive }) => { return { backgroundColor: isActive ? '' : '' } }} sx={{ color: 'white', textTransform: 'none' , paddingRight:'20px',fontFamily:"'Girassol', cursive",fontSize:18}} className='dim pointer'>Favorite</Button>
+
+          {/* <Button   component={NavLink} to='/loginorsignup' style={({ isActive }) => { return { backgroundColor: isActive ? '' : '' } }} sx={{ color: 'white', textTransform: 'none',marginLeft:'auto',textDecoration:'underline',fontFamily:"'Girassol', cursive",fontSize:18}} className='dim pointer'>Login/SignUp</Button> */}
+          {/* <Button onClick={() => loginWithRedirect()} component={NavLink} to='/loginorsignup' style={({ isActive }) => { return { backgroundColor: isActive ? '' : '' } }} sx={{ color: 'white', textTransform: 'none',marginLeft:'auto',textDecoration:'underline',fontFamily:"'Girassol', cursive",fontSize:18}} className='dim pointer'>Login/SignUp</Button> */}
+          {isAuthenticated && (<p>{user.name}</p>)}
+          {isAuthenticated ? (
+            <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Log Out</button>
+          ):
+            <button onClick={() => loginWithRedirect()}>Log In</button>
+>>>>>>> ea95597497a0a4a2ffff8f5ca7e3958457ac845a
           }
         </Toolbar>
       </AppBar>
