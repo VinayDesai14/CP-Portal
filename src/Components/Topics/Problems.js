@@ -1,11 +1,11 @@
 import { Box, Button, Grid, IconButton, Pagination, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
-import TurnedInNotIcon from '@mui/icons-material/TurnedInNot';
-import TurnedInIcon from '@mui/icons-material/TurnedIn';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useAuth0 } from "@auth0/auth0-react";
 
 function Problems(props) {
+  const {user, loginWithRedirect, isAuthenticated, logout} = useAuth0();
     const [cnt, setCnt] = useState(0);
   const [page, setPage] = useState(1);
   const [isLoading,setIsLoading]=useState(false);
@@ -18,6 +18,37 @@ function Problems(props) {
     color: 'green',
     marginRight: 4,
   }
+  const [isSaved, setIsSaved] = useState({});
+  async function setData(name,link){
+    setIsSaved({
+      ...isSaved,
+      [name]: !isSaved[name],
+    });
+    const email=user.email;
+    try{
+
+      await Axios.post("http://localhost:8000/todolistdata",{
+          email,link,name
+      })
+      .then(res=>{
+        if(res.data==="exist"){
+            alert("Problem already saved");
+          }
+        else if(res.data==="notexist"){
+          alert("Problem saved successfully");
+        }
+      })
+      .catch(e=>{
+          alert("wrong details");
+          console.log(e);
+      })
+
+  }
+  catch(e){
+      console.log(e);
+  }
+  }
+
   useEffect(() => {
     const url = `https://codeforces.com/api/problemset.problems?tags=${props.topic}`;
     setIsLoading(true);
@@ -26,6 +57,7 @@ function Problems(props) {
       const end = (page) * 15;
       setCnt(response.data.result.problems.length);
       setProblemsset((response.data.result.problems).slice(start, end));
+      
       setIsLoading(false);
     }).catch((err) => {
       console.log(err);
@@ -38,10 +70,10 @@ function Problems(props) {
     <>
     {
       problemset.map((data, idx) => {
-        const { name, contestId, index } = data;
-        let isBookMarked=false;
+        const { name, contestId, index} = data;
+        
         return (
-          <Grid container spacing={2} sx={{ border: 2,mt:2,height:150}}>
+          <Grid container spacing={2} sx={{ border: 2,mt:2,height:150}} key={idx}>
             <Grid item lg={7} md={7} sm={12} xs={12} sx={{ mt: 5 }}>
               <Typography component='span' variant='h5' >{name}</Typography>
             </Grid>
@@ -49,10 +81,19 @@ function Problems(props) {
               <Button variant='outlined' href={`https://codeforces.com/problemset/problem/${contestId}/${index}`} sx={btnProps} target='_blank'>Solve Problem</Button>
             </Grid>
             <Grid item lg={1} md={1} sm={2} xs={2} sx={{ mt: 5 }}>
-              <IconButton aria-label="delete"  color="primary" onClick={()=>isBookMarked=!isBookMarked}>
-              {isBookMarked?<TurnedInIcon />:<TurnedInNotIcon/>}
-              </IconButton>
+            {isAuthenticated ?(
+                 <>
+                 {isSaved[name]?<Button sx={btnProps} variant='outlined' >Remove</Button>
+                 : <Button sx={btnProps} variant='outlined' onClick={()=>setData(name,`https://codeforces.com/problemset/problem/${contestId}/${index}`)}>Save</Button>} 
+                 </>
+                ):<Button sx={btnProps} variant='outlined' onClick={() => loginWithRedirect()}>Save</Button>
+                
+                }
             </Grid>
+            {/* <>
+                 {isSaved[name]?<Button sx={btnProps} variant='outlined' onClick={() => loginWithRedirect()}>Remove</Button>
+                 : <Button sx={btnProps} variant='outlined' onClick={()=>setData(name,`https://codeforces.com/problemset/problem/${contestId}/${index}`)}>Save</Button>} 
+                 </> */}
           </Grid>
         )
       })
