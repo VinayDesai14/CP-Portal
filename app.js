@@ -43,6 +43,34 @@ app.post("/todolistdata", async (req, res) => {
         console.log(e);
     }
 });
+app.post("/todolistremove", async (req, res) => {
+    const{email,name}=req.body
+    try {
+        const check=await collection.deleteOne({email:email,name:name});
+        if(check){
+            res.json("success")
+        }
+        else{
+            res.json("fail")
+        }
+    } catch (e) {
+        console.log(e);
+    }
+});
+app.post("/todolistcheck", async (req, res) => {
+    const{email,name}=req.body
+    try {
+        const check=await collection.findOne({email:email,name:name});
+        if(check){
+            res.json("exist")
+        }
+        else{
+            res.json("notexist")
+        }
+    } catch (e) {
+        console.log(e);
+    }
+});
 app.listen(port,()=>{
     console.log(`server is running at port no ${port}`);
 })

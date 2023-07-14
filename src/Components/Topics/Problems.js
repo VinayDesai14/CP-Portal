@@ -2,7 +2,7 @@ import { Box, Button, Grid, IconButton, Pagination, Typography } from '@mui/mate
 import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 import CircularProgress from '@mui/material/CircularProgress';
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0 ,withAuthenticationRequired} from "@auth0/auth0-react";
 
 function Problems(props) {
   const {user, loginWithRedirect, isAuthenticated, logout} = useAuth0();
@@ -18,7 +18,34 @@ function Problems(props) {
     color: 'green',
     marginRight: 4,
   }
-  const [isSaved, setIsSaved] = useState({});
+  async function isFound(name){
+    const email=user.email;
+    var val=0;
+    try{
+
+      Axios.post("http://localhost:8000/todolistcheck",{
+          email,name
+      })
+      .then(res=>{
+        if(res.data==="exist"){
+            val=1;
+          }
+        else if(res.data==="notexist"){
+            val=0;
+        }
+      })
+      .catch(e=>{
+          alert("wrong details");
+          console.log(e);
+      })
+      console.log(val);
+    return val;
+  }
+  catch(e){
+      console.log(e);
+  }
+  }
+  // const [isSaved, setIsSaved] = useState({});
   async function setData(name,link){
     // setIsSaved({
     //   ...isSaved,
@@ -56,6 +83,31 @@ function Problems(props) {
       console.log(e);
   }
   }
+  async function DelProb(name){
+    const email=user.email;
+    try{
+
+      await Axios.post("http://localhost:8000/todolistremove",{
+          email,name
+      })
+      .then(res=>{
+        if(res.data==="success"){
+            alert("Problem removed successfully")
+          }
+        else if(res.data==="fail"){
+          alert("Couldn't remove the problem")
+        }
+      })
+      .catch(e=>{
+          alert("wrong details");
+          console.log(e);
+      })
+
+  }
+  catch(e){
+      console.log(e);
+  }
+  }
 
   useEffect(() => {
     const url = `https://codeforces.com/api/problemset.problems?tags=${props.topic}`;
@@ -79,7 +131,9 @@ function Problems(props) {
     {
       problemset.map((data, idx) => {
         const { name, contestId, index} = data;
+        var flag =0;
         
+        // {isAuthenticated && (flag=isFound(name))}
         return (
           <Grid container spacing={2} sx={{ border: 2,mt:2,height:150}} key={idx}>
             <Grid item lg={7} md={7} sm={12} xs={12} sx={{ mt: 5 }}>
@@ -89,14 +143,16 @@ function Problems(props) {
               <Button variant='outlined' href={`https://codeforces.com/problemset/problem/${contestId}/${index}`} sx={btnProps} target='_blank'>Solve Problem</Button>
             </Grid>
             <Grid item lg={1} md={1} sm={2} xs={2} sx={{ mt: 5 }}>
+              {/* {isSaved[name]?<Button sx={btnProps} variant='outlined' >Remove</Button> */}
+            
             {isAuthenticated ?(
-                 <>
-                 {isSaved[name]?<Button sx={btnProps} variant='outlined' >Remove</Button>
-                 : <Button sx={btnProps} variant='outlined' onClick={()=>setData(name,`https://codeforces.com/problemset/problem/${contestId}/${index}`)}>Save</Button>} 
-                 </>
-                ):<Button sx={btnProps} variant='outlined' onClick={() => loginWithRedirect()}>Save</Button>
-                
-                }
+              <>
+              {flag?<Button sx={btnProps} variant='outlined' onClick={()=>DelProb(name)}>Remove</Button>
+                 : <Button sx={btnProps} variant='outlined' onClick={()=>setData(name,`https://codeforces.com/problemset/problem/${contestId}/${index}`)}>Save</Button>
+              } 
+              </>
+             ):<Button sx={btnProps} variant='outlined' onClick={() => loginWithRedirect()}>Save</Button>   
+            }
             </Grid>
             {/* <>
                  {isSaved[name]?<Button sx={btnProps} variant='outlined' onClick={() => loginWithRedirect()}>Remove</Button>

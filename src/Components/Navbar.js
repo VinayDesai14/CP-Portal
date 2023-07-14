@@ -4,6 +4,7 @@ import { AppBar, Box, Toolbar, Button,Avatar} from '@mui/material'
 import React, { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import logo from './logo.ico';
+import { useAuth0 } from "@auth0/auth0-react";
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -33,10 +34,10 @@ function Navbar() {
   };
 
 
-   
   return (
     <>
-    <Box sx={{ flexGrow: 1,px:7,padding:'0px'}}>
+    <Box sx={{ flexGrow: 1,px:7,padding:'0px',mt:1}}>
+
       <AppBar  position="static" color="primary" sx={{backgroundImage:'linear-gradient(to right, #434343 0%, black 100%);'}} >
         <Toolbar sx={{spacing:10}}>
             
@@ -89,18 +90,9 @@ function Navbar() {
           <Box sx={{display:'flex',justifyContent: 'flex-end',width:'100%'}}>
             <Button sx={btnProps} onClick={() => loginWithRedirect()} className='dim pointer'>Log In</Button>
             </Box>
-         
-          }
-         
 
-          {/* <Button   component={NavLink} to='/loginorsignup' style={({ isActive }) => { return { backgroundColor: isActive ? '' : '' } }} sx={{ color: 'white', textTransform: 'none',marginLeft:'auto',textDecoration:'underline',fontFamily:"'Girassol', cursive",fontSize:18}} className='dim pointer'>Login/SignUp</Button> */}
-          {/* <Button onClick={() => loginWithRedirect()} component={NavLink} to='/loginorsignup' style={({ isActive }) => { return { backgroundColor: isActive ? '' : '' } }} sx={{ color: 'white', textTransform: 'none',marginLeft:'auto',textDecoration:'underline',fontFamily:"'Girassol', cursive",fontSize:18}} className='dim pointer'>Login/SignUp</Button> */}
-          {/* {isAuthenticated && (<p>{user.name}</p>)}
-          {isAuthenticated ? (
-            <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Log Out</button>
-          ):
-            <button onClick={() => loginWithRedirect()}>Log In</button>
-          } */}
+          }
+
         </Toolbar>
       </AppBar>
     </Box>
