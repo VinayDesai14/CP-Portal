@@ -4,17 +4,6 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import BinarySearch from '../Topics/BinarySearch';
-import BitMasks from '../Topics/BitMasks';
-import Defaults from '../Topics/Defaults';
-import Dp from '../Topics/Dp';
-import Sorting from '../Topics/Sorting';
-import Greedy from '../Topics/Greedy';
-import Strings from '../Topics/Strings';
-import Trees from '../Topics/Trees';
-import Graphs from '../Topics/Graphs';
-import TwoPointers from '../Topics/TwoPointers';
-import Math from '../Topics/Math';
 import Problems from '../Topics/Problems';
 
 function Practice() {
@@ -45,7 +34,6 @@ function Practice() {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-<<<<<<< HEAD
           <MenuItem value="binary%20search">Binary Search</MenuItem>
           <MenuItem value="bitmasks">Bit masks </MenuItem>
           <MenuItem value="dp">Dp</MenuItem>
@@ -56,18 +44,6 @@ function Practice() {
           <MenuItem value="sortings">Sorting</MenuItem>
           <MenuItem value="trees">Trees</MenuItem>
           <MenuItem value="two%20pointers">Two Pointers</MenuItem>
-=======
-          <MenuItem value="BinarySearch">Binary Search</MenuItem>
-          <MenuItem value="BitMasks">Bit masks </MenuItem>
-          <MenuItem value="Dp">DP</MenuItem>
-          <MenuItem value="Graphs">Graphs</MenuItem>
-          <MenuItem value="Greedy">Greedy</MenuItem>
-          <MenuItem value="Math">Math</MenuItem>
-          <MenuItem value="Strings">Strings</MenuItem>
-          <MenuItem value="Sorting">Sorting</MenuItem>
-          <MenuItem value="Trees">Trees</MenuItem>
-          <MenuItem value="TwoPointers">Two Pointers</MenuItem>
->>>>>>> ea95597497a0a4a2ffff8f5ca7e3958457ac845a
         </Select>
         
       </FormControl>

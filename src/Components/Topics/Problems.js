@@ -20,10 +20,10 @@ function Problems(props) {
   }
   const [isSaved, setIsSaved] = useState({});
   async function setData(name,link){
-    setIsSaved({
-      ...isSaved,
-      [name]: !isSaved[name],
-    });
+    // setIsSaved({
+    //   ...isSaved,
+    //   [name]: !isSaved[name],
+    // });
     const email=user.email;
     try{
 
@@ -33,9 +33,17 @@ function Problems(props) {
       .then(res=>{
         if(res.data==="exist"){
             alert("Problem already saved");
+            setIsSaved({
+              ...isSaved,
+              [name]: true,
+            });
           }
         else if(res.data==="notexist"){
           alert("Problem saved successfully");
+          setIsSaved({
+            ...isSaved,
+            [name]: true,
+          });
         }
       })
       .catch(e=>{
