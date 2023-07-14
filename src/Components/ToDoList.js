@@ -22,7 +22,31 @@ function ToDoList() {
     marginRight: 6,
   }
 
-  
+  async function DelProb(name){
+    const email=user.email;
+    try{
+
+      await Axios.post("http://localhost:8000/todolistremove",{
+          email,name
+      })
+      .then(res=>{
+        if(res.data==="success"){
+            alert("Problem removed successfully")
+          }
+        else if(res.data==="fail"){
+          alert("Couldn't remove the problem")
+        }
+      })
+      .catch(e=>{
+          alert("wrong details");
+          console.log(e);
+      })
+
+  }
+  catch(e){
+      console.log(e);
+  }
+  }
  
 
   useEffect(()=>{
@@ -43,7 +67,7 @@ function ToDoList() {
   })
     
   
-     },[page])
+  },[page])
       
     const problems=(
       <>
@@ -61,7 +85,7 @@ function ToDoList() {
               </Grid>
               <Grid item lg={1} md={1} sm={2} xs={2} sx={{ mt: 5 }}>
         
-                <Button sx={btnProps} variant='outlined' >Remove</Button>
+                <Button onClick={()=>DelProb(name)} sx={btnProps} variant='outlined' >Remove</Button>
                   
               </Grid>
             </Grid>
