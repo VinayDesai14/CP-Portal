@@ -8,9 +8,12 @@ import { useAuth0 } from "@auth0/auth0-react";
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import { alignProperty } from '@mui/material/styles/cssUtils';
+import { useAuth0 } from "@auth0/auth0-react";
 
 function Navbar() {
-
+ 
+  const [flag,setFlag]=useState(false);
   
    const {user, loginWithRedirect, isAuthenticated, logout} = useAuth0();
    const [anchorEl, setAnchorEl] = React.useState(null);
@@ -30,9 +33,11 @@ function Navbar() {
     setAnchorEl(null);
   };
 
+
   return (
     <>
     <Box sx={{ flexGrow: 1,px:7,padding:'0px',mt:1}}>
+
       <AppBar  position="static" color="primary" sx={{backgroundImage:'linear-gradient(to right, #434343 0%, black 100%);'}} >
         <Toolbar sx={{spacing:10}}>
             
@@ -85,7 +90,9 @@ function Navbar() {
           <Box sx={{display:'flex',justifyContent: 'flex-end',width:'100%'}}>
             <Button sx={btnProps} onClick={() => loginWithRedirect()} className='dim pointer'>Log In</Button>
             </Box>
+
           }
+
         </Toolbar>
       </AppBar>
     </Box>
