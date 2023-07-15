@@ -33,17 +33,9 @@ function Problems(props) {
       .then(res=>{
         if(res.data==="exist"){
             alert("Problem already saved");
-            setIsSaved({
-              ...isSaved,
-              [name]: true,
-            });
           }
         else if(res.data==="notexist"){
           alert("Problem saved successfully");
-          setIsSaved({
-            ...isSaved,
-            [name]: true,
-          });
         }
       })
       .catch(e=>{
@@ -79,7 +71,7 @@ function Problems(props) {
     {
       problemset.map((data, idx) => {
         const { name, contestId, index} = data;
-        
+        const flag=isSaved(name);
         return (
           <Grid container spacing={2} sx={{ border: 2,mt:2,height:150}} key={idx}>
             <Grid item lg={7} md={7} sm={12} xs={12} sx={{ mt: 5 }}>
@@ -91,7 +83,7 @@ function Problems(props) {
             <Grid item lg={1} md={1} sm={2} xs={2} sx={{ mt: 5 }}>
             {isAuthenticated ?(
                  <>
-                 {isSaved[name]?<Button sx={btnProps} variant='outlined' >Remove</Button>
+                 {flag?<Button sx={btnProps} variant='outlined' >Remove</Button>
                  : <Button sx={btnProps} variant='outlined' onClick={()=>setData(name,`https://codeforces.com/problemset/problem/${contestId}/${index}`)}>Save</Button>} 
                  </>
                 ):<Button sx={btnProps} variant='outlined' onClick={() => loginWithRedirect()}>Save</Button>
