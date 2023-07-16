@@ -4,7 +4,8 @@ import { useAuth0 ,withAuthenticationRequired} from "@auth0/auth0-react";
 import CircularProgress from '@mui/material/CircularProgress';
 import { useEffect } from 'react';
 import { Box, Button, Grid, Pagination, Typography } from '@mui/material'
-
+import { remove } from '../Features/problemsSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 function ToDoList() {
   const {user} = useAuth0();
@@ -13,16 +14,49 @@ function ToDoList() {
   const [page, setPage] = useState(1);
   const [problemSet,setProblemSet]=useState([]);
   const [isLoading,setIsLoading]=useState(false);
+  const isSaved=useSelector((state)=>state.problems.isSaved);
+  const dispatch=useDispatch();
+
   const btnProps = {
     ':hover': {
-      bgcolor: 'green', // theme.palette.primary.main
+      bgcolor: '#03b6fc', // theme.palette.primary.main
       color: 'white',
     },
-    color: 'green',
-    marginRight: 6,
+    color: 'white',
+    marginRight: 4,
+    marginLeft: 4,
+    display:'block',
+    width:'100%',
+    textAlign:'center',
+    borderColor:'white',
   }
 
-  
+  async function DelProb(name){
+    const email=user.email;
+    try{
+
+      await Axios.post("http://localhost:8000/todolistremove",{
+          email,name
+      })
+      .then(res=>{
+        if(res.data==="success"){
+          dispatch(remove(name));
+            alert("Problem removed successfully")
+          }
+        else if(res.data==="fail"){
+          alert("Couldn't remove the problem")
+        }
+      })
+      .catch(e=>{
+          alert("wrong details");
+          console.log(e);
+      })
+
+  }
+  catch(e){
+      console.log(e);
+  }
+  }
  
 
   useEffect(()=>{
@@ -43,7 +77,9 @@ function ToDoList() {
   })
     
   
-     },[page])
+
+  },[page,isSaved])
+
       
     const problems=(
       <>
@@ -52,19 +88,22 @@ function ToDoList() {
           const {link,name} = data;
   
           return (
-            <Grid container spacing={2} sx={{ border: 2,mt:2,height:150}} key={idx}>
-              <Grid item lg={7} md={7} sm={12} xs={12} sx={{ mt: 5 }}>
-                <Typography component='span' variant='h5' >{name}</Typography>
-              </Grid>
-              <Grid item lg={4} md={4} sm={10} xs={10} sx={{ mt: 5 }}>
-                <Button variant='outlined' href={link} sx={btnProps} target='_blank'>Solve Problem</Button>
-              </Grid>
-              <Grid item lg={1} md={1} sm={2} xs={2} sx={{ mt: 5 }}>
-        
-                <Button sx={btnProps} variant='outlined' >Remove</Button>
-                  
-              </Grid>
+            <>
+
+            <Grid container spacing={2} sx={{ border: 2,borderColor:'white',mt:2,height:200}} key={idx}>
+            <Grid  lg={6} md={12} xs={12} sx={{display:'flex',justifyContent:'center',alignItems:'center'}}>
+              <Typography component='span' variant='h5' sx={{color:'white'}} >{name}</Typography>
             </Grid>
+            <Grid  lg={3} md={6} xs={12} sx={{width:'100%',display:'flex',justifyContent:'center',alignItems:'center'}}>
+              <Button variant='outlined' href={link} sx={btnProps} target='_blank'>Solve Problem</Button>
+            </Grid>
+            <Grid lg={3} md={6} xs={12} sx={{display:'flex',justifyContent:'center',alignItems:'center'}}>
+              
+            <Button sx={btnProps} variant='outlined' onClick={()=>DelProb(name)}>Remove</Button>
+             
+            </Grid>
+          </Grid>
+            </>
           )
         })
       }

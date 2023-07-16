@@ -2,7 +2,11 @@ import { Box, Button, Grid, IconButton, Pagination, Typography } from '@mui/mate
 import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 import CircularProgress from '@mui/material/CircularProgress';
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0 ,withAuthenticationRequired} from "@auth0/auth0-react";
+import { useDispatch, useSelector } from 'react-redux';
+import { remove, save } from '../../Features/problemsSlice';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 function Problems(props) {
   const {user, loginWithRedirect, isAuthenticated, logout} = useAuth0();
@@ -10,15 +14,50 @@ function Problems(props) {
   const [page, setPage] = useState(1);
   const [isLoading,setIsLoading]=useState(false);
   const [problemset, setProblemsset] = useState([]);
+  const isSaved=useSelector((state)=>state.problems.isSaved);
+  const dispatch=useDispatch();
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+
   const btnProps = {
     ':hover': {
-      bgcolor: 'green', // theme.palette.primary.main
+      bgcolor: '#03b6fc', // theme.palette.primary.main
       color: 'white',
     },
-    color: 'green',
+    color: 'white',
     marginRight: 4,
+    marginLeft: 4,
+    display:'block',
+    width:'100%',
+    textAlign:'center',
+    borderColor:'white',
   }
-  const [isSaved, setIsSaved] = useState({});
+  async function isFound(name){
+    const email=user.email;
+    try{
+
+      Axios.post("http://localhost:8000/todolistcheck",{
+          email,name
+      })
+      .then(res=>{
+        if(res.data==="exist"){
+            dispatch(save(name));
+          }
+        else if(res.data==="notexist"){
+            dispatch(remove(name));
+        }
+      })
+      .catch(e=>{
+          alert("wrong details");
+          console.log(e);
+      })
+    
+  }
+  catch(e){
+      console.log(e);
+  }
+  }
+  // const [isSaved, setIsSaved] = useState({});
   async function setData(name,link){
     // setIsSaved({
     //   ...isSaved,
@@ -35,7 +74,34 @@ function Problems(props) {
             alert("Problem already saved");
           }
         else if(res.data==="notexist"){
+          dispatch(save(name));
           alert("Problem saved successfully");
+        }
+      })
+      .catch(e=>{
+          alert("wrong details");
+          console.log(e);
+      })
+
+  }
+  catch(e){
+      console.log(e);
+  }
+  }
+  async function DelProb(name){
+    const email=user.email;
+    try{
+
+      await Axios.post("http://localhost:8000/todolistremove",{
+          email,name
+      })
+      .then(res=>{
+        if(res.data==="success"){
+          dispatch(remove(name));
+            alert("Problem removed successfully")
+          }
+        else if(res.data==="fail"){
+          alert("Couldn't remove the problem")
         }
       })
       .catch(e=>{
@@ -71,29 +137,33 @@ function Problems(props) {
     {
       problemset.map((data, idx) => {
         const { name, contestId, index} = data;
-        const flag=isSaved(name);
+        {/* isFound(name); */}
+        {/* var flag=isFound(name); */}
+       {/* {isAuthenticated && (flag=isFound(name))} */}
+       {/* if(isAuthenticated)
+       isFound(name); */}
+       {/* sx={isMatch?{ border: 2,mt:2,height:350}:{ border: 2,mt:2,height:150}} */}
+       {/* {isAuthenticated && isFound(name)===1?dispatch(save(name)):dispatch(remove(name))} */}
         return (
-          <Grid container spacing={2} sx={{ border: 2,mt:2,height:150}} key={idx}>
-            <Grid item lg={7} md={7} sm={12} xs={12} sx={{ mt: 5 }}>
+          <Grid container spacing={2} sx={{ border: 2,mt:2,height:200}} key={idx}>
+            <Grid  lg={6} md={12} xs={12} sx={{display:'flex',justifyContent:'center',alignItems:'center'}}>
               <Typography component='span' variant='h5' >{name}</Typography>
             </Grid>
-            <Grid item lg={4} md={4} sm={10} xs={10} sx={{ mt: 5 }}>
+            <Grid  lg={3} md={6} xs={12} sx={{width:'100%',display:'flex',justifyContent:'center',alignItems:'center'}}>
               <Button variant='outlined' href={`https://codeforces.com/problemset/problem/${contestId}/${index}`} sx={btnProps} target='_blank'>Solve Problem</Button>
             </Grid>
-            <Grid item lg={1} md={1} sm={2} xs={2} sx={{ mt: 5 }}>
+            <Grid lg={3} md={6} xs={12} sx={{display:'flex',justifyContent:'center',alignItems:'center'}}>
+              
+            
             {isAuthenticated ?(
-                 <>
-                 {flag?<Button sx={btnProps} variant='outlined' >Remove</Button>
-                 : <Button sx={btnProps} variant='outlined' onClick={()=>setData(name,`https://codeforces.com/problemset/problem/${contestId}/${index}`)}>Save</Button>} 
-                 </>
-                ):<Button sx={btnProps} variant='outlined' onClick={() => loginWithRedirect()}>Save</Button>
-                
-                }
+              <>
+              {isSaved.includes(name)?<Button sx={btnProps} variant='outlined' onClick={()=>DelProb(name)}>Remove</Button>
+                 : <Button sx={btnProps} variant='outlined' onClick={()=>setData(name,`https://codeforces.com/problemset/problem/${contestId}/${index}`)}>Save</Button>
+              } 
+              </>
+             ):<Button sx={btnProps} variant='outlined' onClick={() => loginWithRedirect()}>Save</Button>   
+            }
             </Grid>
-            {/* <>
-                 {isSaved[name]?<Button sx={btnProps} variant='outlined' onClick={() => loginWithRedirect()}>Remove</Button>
-                 : <Button sx={btnProps} variant='outlined' onClick={()=>setData(name,`https://codeforces.com/problemset/problem/${contestId}/${index}`)}>Save</Button>} 
-                 </> */}
           </Grid>
         )
       })

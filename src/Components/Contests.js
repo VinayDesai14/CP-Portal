@@ -19,7 +19,7 @@ function Contests() {
           <a href='/'>CP Portal</a>
         </div>
         <div>
-          This is competitive Programming portal
+          This is Competitive Programming portal
         </div>
     </footer>
     </div>
