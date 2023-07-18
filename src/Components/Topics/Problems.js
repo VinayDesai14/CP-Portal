@@ -32,20 +32,15 @@ function Problems(props) {
     textAlign:'center',
     borderColor:'white',
   }
-  async function isFound(name){
+  async function SavedData(){
     const email=user.email;
     try{
 
       Axios.post("http://localhost:8000/todolistcheck",{
-          email,name
+          email
       })
       .then(res=>{
-        if(res.data==="exist"){
-            dispatch(save(name));
-          }
-        else if(res.data==="notexist"){
-            dispatch(remove(name));
-        }
+        console.log(res);
       })
       .catch(e=>{
           alert("wrong details");
@@ -54,9 +49,10 @@ function Problems(props) {
     
   }
   catch(e){
-      console.log(e);
+    console.log(e);
   }
-  }
+}
+{isAuthenticated && SavedData()}
   // const [isSaved, setIsSaved] = useState({});
   async function setData(name,link){
     // setIsSaved({

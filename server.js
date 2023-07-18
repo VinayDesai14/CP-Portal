@@ -17,11 +17,6 @@ app.post("/todolist",async(req,res)=>{
     try{
         const obj = await collection.find({email:email},{link:1,name:1});
         res.json(obj);
-        // if(obj){
-        //    res.json(obj);
-        // }else{
-        //     res.json("nothing");
-        // }
     }
     catch(e){
         res.json("fail");
@@ -43,6 +38,31 @@ app.post("/todolistdata", async (req, res) => {
         console.log(e);
     }
 });
+app.post("/todolistremove", async (req, res) => {
+    const{email,name}=req.body
+    try {
+        const check=await collection.deleteOne({email:email,name:name});
+        if(check){
+            res.json("success")
+        }
+        else{
+            res.json("fail")
+        }
+    } catch (e) {
+        console.log(e);
+    }
+});
+app.post("/todolistcheck", async (req, res) => {
+    const {email}=req.body;
+    try{
+        const obj = await collection.find({email:email},{name:1});
+        res.json(obj);
+    }
+    catch(e){
+        res.json("fail");
+    }
+});
 app.listen(port,()=>{
     console.log(`server is running at port no ${port}`);
 })
+
