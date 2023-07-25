@@ -33,6 +33,7 @@ function Problems(props) {
   const dispatch=useDispatch();
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+  const[currEmail,setcurrEmail]=useState("");
 
   const btnProps = {
     ':hover': {
@@ -48,8 +49,8 @@ function Problems(props) {
     borderColor:'white',
   }
   async function SavedData(){
-   
     const email=user.email;
+    setcurrEmail(user.email);
     try{
 
       Axios.post("http://localhost:8000/todolistcheck",{
@@ -58,10 +59,12 @@ function Problems(props) {
       .then(res=>{
         console.log(res);
         setPData(res.data);
-        pdata.map((problems,idx)=>{
-          const {name}=problems;
-          console.log(name);
-          localStorage.setItem(name, JSON.stringify(name));
+        pdata.map((data,idx)=>{
+          const {name}=data;
+          saveInLocal(name);
+          // console.log(name);
+          // // localStorage.setItem(name, JSON.stringify(name));
+          // localStorage.setItem(name, name);
         })
       })
       .catch(e=>{
@@ -74,23 +77,11 @@ function Problems(props) {
     console.log(e);
   }
 }
-// {isAuthenticated && SavedData()};
-// SavedData();
-// useEffect(()=>{
-//   {isAuthenticated && SavedData()};
-//   // if(isAuthenticated)
-//   // SavedData();
-// },[isSaved]);
-
-  // const [isSaved, setIsSaved] = useState({});
-  
-
-
-  async function setData(name,link){
-    // setIsSaved({
-    //   ...isSaved,
-    //   [name]: !isSaved[name],
-    // });
+async function saveInLocal(name){
+  localStorage.setItem(name,name);
+  alert("problem Saved locally");
+}
+async function setData(name,link){
     const email=user.email;
     try{
 
@@ -149,12 +140,12 @@ function Problems(props) {
   }
   }
 
-  // useEffect(()=>{
-  //  if(isAuthenticated)
-  //  SavedData();
-  //  else
-  //  localStorage.clear();
-  // },[isAuthenticated])
+  useEffect(()=>{
+   if(isAuthenticated)
+   SavedData();
+   else
+   localStorage.clear();
+  },[isAuthenticated,currEmail]);
 
   useEffect(() => {
     const url = `https://codeforces.com/api/problemset.problems?tags=${props.topic}`;

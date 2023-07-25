@@ -14,7 +14,7 @@ import Axios from 'axios'
 function Navbar() {
   
   const handleLogOut=()=>{
-    localStorage.clear();
+    // localStorage.clear();
     logout({ logoutParams: { returnTo: window.location.origin } });
   }
 
@@ -49,42 +49,6 @@ catch(e){
   console.log(e);
 }
 }
-useEffect(()=>{
-   if(isAuthenticated)
-   SavedData();
-   else
-   localStorage.clear();
-  },[isAuthenticated])
-const [pdata,setPData]=useState([]);
-
-  async function SavedData(){
-   
-    const email=user.email;
-    try{
-
-      Axios.post("http://localhost:8000/todolistcheck",{
-          email
-      })
-      .then(res=>{
-        console.log(res);
-        setPData(res.data);
-        pdata.map((problems,idx)=>{
-          const {name}=problems;
-          console.log(name);
-          localStorage.setItem(name, JSON.stringify(name));
-        })
-      })
-      .catch(e=>{
-          alert("wrong details");
-          console.log(e);
-      })
-    
-  }
-  catch(e){
-    console.log(e);
-  }
-}
- 
   return (
     <>
     <Box sx={{ flexGrow: 1,px:7,padding:'0px',mt:1}}>
