@@ -40,8 +40,9 @@ function ToDoList() {
       })
       .then(res=>{
         if(res.data==="success"){
+          localStorage.removeItem(name);
           dispatch(remove(name));
-            alert("Problem removed successfully")
+            // alert("Problem removed successfully")
           }
         else if(res.data==="fail"){
           alert("Couldn't remove the problem")

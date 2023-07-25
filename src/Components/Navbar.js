@@ -10,9 +10,14 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import MenuBar from './MenuBar';
-
+import Axios from 'axios'
 function Navbar() {
- 
+  
+  const handleLogOut=()=>{
+    localStorage.clear();
+    logout({ logoutParams: { returnTo: window.location.origin } });
+  }
+
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   
@@ -33,8 +38,53 @@ function Navbar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  
+const  handleLogin=()=>{
+try{
+    loginWithRedirect();
+  // if(isAuthenticated)
+  // SavedData();
+}
+catch(e){
+  console.log(e);
+}
+}
+useEffect(()=>{
+   if(isAuthenticated)
+   SavedData();
+   else
+   localStorage.clear();
+  },[isAuthenticated])
+const [pdata,setPData]=useState([]);
 
+  async function SavedData(){
+   
+    const email=user.email;
+    try{
 
+      Axios.post("http://localhost:8000/todolistcheck",{
+          email
+      })
+      .then(res=>{
+        console.log(res);
+        setPData(res.data);
+        pdata.map((problems,idx)=>{
+          const {name}=problems;
+          console.log(name);
+          localStorage.setItem(name, JSON.stringify(name));
+        })
+      })
+      .catch(e=>{
+          alert("wrong details");
+          console.log(e);
+      })
+    
+  }
+  catch(e){
+    console.log(e);
+  }
+}
+ 
   return (
     <>
     <Box sx={{ flexGrow: 1,px:7,padding:'0px',mt:1}}>
@@ -79,13 +129,13 @@ function Navbar() {
       open={Boolean(anchorEl)}
       onClose={handleClose}
     >
-  <MenuItem  className='dim pointer' onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Log Out</MenuItem>
+  <MenuItem  className='dim pointer' onClick={handleLogOut}>Log Out</MenuItem>
 
     </Menu>
   </Box>
 ):
 <Box sx={{display:'flex',justifyContent: 'flex-end',width:'100%'}}>
-  <Button sx={btnProps} onClick={() => loginWithRedirect()} className='dim pointer'>Log In</Button>
+  <Button sx={btnProps} onClick={handleLogin} className='dim pointer'>Log In</Button>
   </Box>
 
 }</>}

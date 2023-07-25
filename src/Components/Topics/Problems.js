@@ -7,13 +7,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import { remove, save } from '../../Features/problemsSlice';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { CleaningServices } from '@mui/icons-material';
+
+// const getProblemsFromStorage=()=>{
+//   let storedProblems = localStorage.getItem('savedProblems');
+//   if(storedProblems) 
+//   return JSON.parse(storedProblems);
+//   else
+//   return [];
+// }
+
 
 function Problems(props) {
+  
+ 
+
   const {user, loginWithRedirect, isAuthenticated, logout} = useAuth0();
     const [cnt, setCnt] = useState(0);
   const [page, setPage] = useState(1);
   const [isLoading,setIsLoading]=useState(false);
   const [problemset, setProblemsset] = useState([]);
+  const [savedproblems,setSavedProblems]=useState([]);
+  const [pdata,setPData]=useState([]);
   const isSaved=useSelector((state)=>state.problems.isSaved);
   const dispatch=useDispatch();
   const theme = useTheme();
@@ -33,6 +48,7 @@ function Problems(props) {
     borderColor:'white',
   }
   async function SavedData(){
+   
     const email=user.email;
     try{
 
@@ -41,6 +57,12 @@ function Problems(props) {
       })
       .then(res=>{
         console.log(res);
+        setPData(res.data);
+        pdata.map((problems,idx)=>{
+          const {name}=problems;
+          console.log(name);
+          localStorage.setItem(name, JSON.stringify(name));
+        })
       })
       .catch(e=>{
           alert("wrong details");
@@ -52,8 +74,18 @@ function Problems(props) {
     console.log(e);
   }
 }
-{isAuthenticated && SavedData()}
+// {isAuthenticated && SavedData()};
+// SavedData();
+// useEffect(()=>{
+//   {isAuthenticated && SavedData()};
+//   // if(isAuthenticated)
+//   // SavedData();
+// },[isSaved]);
+
   // const [isSaved, setIsSaved] = useState({});
+  
+
+
   async function setData(name,link){
     // setIsSaved({
     //   ...isSaved,
@@ -71,7 +103,8 @@ function Problems(props) {
           }
         else if(res.data==="notexist"){
           dispatch(save(name));
-          alert("Problem saved successfully");
+          setSavedProblems([...savedproblems,name]);
+          localStorage.setItem(name, JSON.stringify(name));
         }
       })
       .catch(e=>{
@@ -93,8 +126,13 @@ function Problems(props) {
       })
       .then(res=>{
         if(res.data==="success"){
+          setSavedProblems((problemName) => problemName.filter((id) => id !== name));
+          console.log(name);
+          localStorage.removeItem(name);
           dispatch(remove(name));
-            alert("Problem removed successfully")
+          
+          
+            // alert("Problem removed successfully")
           }
         else if(res.data==="fail"){
           alert("Couldn't remove the problem")
@@ -111,6 +149,13 @@ function Problems(props) {
   }
   }
 
+  // useEffect(()=>{
+  //  if(isAuthenticated)
+  //  SavedData();
+  //  else
+  //  localStorage.clear();
+  // },[isAuthenticated])
+
   useEffect(() => {
     const url = `https://codeforces.com/api/problemset.problems?tags=${props.topic}`;
     setIsLoading(true);
@@ -125,7 +170,7 @@ function Problems(props) {
       console.log(err);
       setIsLoading(false);
     })
-
+    
   }, [page,props.topic])
 
   const problems=(
@@ -153,7 +198,7 @@ function Problems(props) {
             
             {isAuthenticated ?(
               <>
-              {isSaved.includes(name)?<Button sx={btnProps} variant='outlined' onClick={()=>DelProb(name)}>Remove</Button>
+              {localStorage.getItem(name)?<Button sx={btnProps} variant='outlined' onClick={()=>DelProb(name)}>Remove</Button>
                  : <Button sx={btnProps} variant='outlined' onClick={()=>setData(name,`https://codeforces.com/problemset/problem/${contestId}/${index}`)}>Save</Button>
               } 
               </>
@@ -175,7 +220,7 @@ function Problems(props) {
    <Pagination
      sx={{ mt: 4, display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 2 }}
      count={Math.ceil(cnt / 15)}
-     color="primary"
+     color="secondary"
      size='large'
      onChange={(e, value) => setPage(value)}
    />
