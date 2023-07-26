@@ -72,7 +72,7 @@ function ToDoList() {
       console.log(e);
       setIsLoading(false);
   })
-  },[page,isSaved])
+  },[page])
 
       
     const problems=(
