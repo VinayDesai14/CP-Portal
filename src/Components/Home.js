@@ -29,27 +29,27 @@ function Home() {
      <Grid container spacing={1} sx={{ textDecoration: 'none'}}>
        <Grid  lg={4} md={6} sm={12} sx={{mt:4,display:'flex',justifyContent:'center'}} >
        <a  href="https://codeforces.com/"><img src={CF} alt="CodeForces" width='350' height='200' /></a>
-    {/* <Item>   <a  href="https://codeforces.com/"><img src={CF} alt="CodeForces" width='350' height='200' /></a></Item>  */}
+    
       </Grid>
       <Grid  lg={4} md={6} sm={12} sx={{mt:4,display:'flex',justifyContent:'center'}}>
       <a  href="https://codechef.com/"><img src={CC} alt="CodeChef" width='350' height='200' /></a>
-      {/* <Item sx={{ml:2}}> <a  href="https://codechef.com/"><img src={CC} alt="CodeChef" width='350' height='200' /></a></Item> */}
+      
       </Grid>
       <Grid  lg={4} md={6} sm={12} sx={{mt:4,display:'flex',justifyContent:'center'}} >
       <a  href="https://atcoder.jp/"> <img src={ATC} alt="AtCoder" width='350' height='200' /> </a>
-      {/* <Item sx={{ml:2}}>  <a  href="https://atcoder.jp/"> <img src={ATC} alt="AtCoder" width='350' height='200' /> </a></Item> */}
+     
       </Grid>
       <Grid  lg={4} md={6} sm={12} sx={{mt:4,display:'flex',justifyContent:'center'}}>
       <a  href="https://hackerrank.com/"><img src={HR} alt="HackerRank" width='350' height='200' /></a>
-      {/* <Item sx={{mt:2}}> <a  href="https://hackerrank.com/"><img src={HR} alt="HackerRank" width='350' height='200' /></a></Item> */}
+     
        </Grid>
       <Grid  lg={4} md={6} sm={12} sx={{mt:4,display:'flex',justifyContent:'center'}}>
       <a  href="https://www.geeksforgeeks.org/"><img src={GFG} alt="GeeksforGeeks" width='350' height='200' /></a>
-      {/* <Item sx={{ml:2,mt:2}}> <a  href="https://www.geeksforgeeks.org/"><img src={GFG} alt="GeeksforGeeks" width='350' height='200' /></a></Item> */}
+      
       </Grid>
       <Grid  lg={4} md={6} sm={12} sx={{mt:4,display:'flex',justifyContent:'center'}}>
       <a  href="https://leetcode.com/"> <img src={LC} alt="LeetCode" width='350' height='200' /> </a>
-      {/* <Item sx={{ml:2,mt:2}}> <a  href="https://leetcode.com/"> <img src={LC} alt="LeetCode" width='350' height='200' /> </a></Item> */}
+      
       </Grid>
       </Grid>
       </Box>

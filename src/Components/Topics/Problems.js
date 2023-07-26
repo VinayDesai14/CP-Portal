@@ -1,27 +1,11 @@
-import { Box, Button, Grid, IconButton, Pagination, Typography } from '@mui/material'
+import { Box, Button, Grid, Pagination, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 import CircularProgress from '@mui/material/CircularProgress';
 import { useAuth0 ,withAuthenticationRequired} from "@auth0/auth0-react";
-import { useDispatch, useSelector } from 'react-redux';
-import { remove, save } from '../../Features/problemsSlice';
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { CleaningServices } from '@mui/icons-material';
-
-// const getProblemsFromStorage=()=>{
-//   let storedProblems = localStorage.getItem('savedProblems');
-//   if(storedProblems) 
-//   return JSON.parse(storedProblems);
-//   else
-//   return [];
-// }
-
 
 function Problems(props) {
   
- 
-
   const {user, loginWithRedirect, isAuthenticated, logout} = useAuth0();
     const [cnt, setCnt] = useState(0);
   const [page, setPage] = useState(1);
@@ -29,10 +13,6 @@ function Problems(props) {
   const [problemset, setProblemsset] = useState([]);
   const [savedproblems,setSavedProblems]=useState([]);
   const [pdata,setPData]=useState([]);
-  const isSaved=useSelector((state)=>state.problems.isSaved);
-  const dispatch=useDispatch();
-  const theme = useTheme();
-  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   const[currEmail,setcurrEmail]=useState("");
 
   const btnProps = {
@@ -62,9 +42,6 @@ function Problems(props) {
         pdata.map((data,idx)=>{
           const {name}=data;
           saveInLocal(name);
-          // console.log(name);
-          // // localStorage.setItem(name, JSON.stringify(name));
-          // localStorage.setItem(name, name);
         })
       })
       .catch(e=>{
@@ -93,7 +70,6 @@ async function setData(name,link){
             console.log("Problem already saved");
           }
           else if(res.data==="notexist"){
-            dispatch(save(name));
             setSavedProblems([...savedproblems,name]);
             localStorage.setItem(name, JSON.stringify(name));
             console.log("Problem saved successfully");
@@ -121,7 +97,6 @@ async function setData(name,link){
           setSavedProblems((problemName) => problemName.filter((id) => id !== name));
           console.log(name);
           localStorage.removeItem(name);
-          dispatch(remove(name));
           
           
             console.log("Problem removed successfully")
@@ -170,13 +145,6 @@ async function setData(name,link){
     {
       problemset.map((data, idx) => {
         const { name, contestId, index} = data;
-        {/* isFound(name); */}
-        {/* var flag=isFound(name); */}
-       {/* {isAuthenticated && (flag=isFound(name))} */}
-       {/* if(isAuthenticated)
-       isFound(name); */}
-       {/* sx={isMatch?{ border: 2,mt:2,height:350}:{ border: 2,mt:2,height:150}} */}
-       {/* {isAuthenticated && isFound(name)===1?dispatch(save(name)):dispatch(remove(name))} */}
         return (
           <Grid container spacing={2} sx={{ border: 2,mt:2,height:200}} key={idx}>
             <Grid  lg={6} md={12} xs={12} sx={{display:'flex',justifyContent:'center',alignItems:'center'}}>

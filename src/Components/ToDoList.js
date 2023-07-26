@@ -5,7 +5,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { useEffect } from 'react';
 import { Box, Button, Grid, Pagination, Typography } from '@mui/material'
 import { remove } from '../Features/problemsSlice';
-import { useDispatch, useSelector } from 'react-redux';
 
 function ToDoList() {
   const {user} = useAuth0();
@@ -14,8 +13,6 @@ function ToDoList() {
   const [page, setPage] = useState(1);
   const [problemSet,setProblemSet]=useState([]);
   const [isLoading,setIsLoading]=useState(false);
-  const isSaved=useSelector((state)=>state.problems.isSaved);
-  const dispatch=useDispatch();
 
   const btnProps = {
     ':hover': {
@@ -41,7 +38,6 @@ function ToDoList() {
       .then(res=>{
         if(res.data==="success"){
           localStorage.removeItem(name);
-          dispatch(remove(name));
             console.log("Problem removed successfully")
           }
         else if(res.data==="fail"){

@@ -10,7 +10,6 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import MenuBar from './MenuBar';
-import Axios from 'axios'
 function Navbar() {
   
   const handleLogOut=()=>{
