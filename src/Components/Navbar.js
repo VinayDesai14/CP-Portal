@@ -14,7 +14,6 @@ import Axios from 'axios'
 function Navbar() {
   
   const handleLogOut=()=>{
-    // localStorage.clear();
     logout({ logoutParams: { returnTo: window.location.origin } });
   }
 
@@ -42,8 +41,6 @@ function Navbar() {
 const  handleLogin=()=>{
 try{
     loginWithRedirect();
-  // if(isAuthenticated)
-  // SavedData();
 }
 catch(e){
   console.log(e);
@@ -103,51 +100,6 @@ catch(e){
   </Box>
 
 }</>}
-          {/* <Button className='home' component={NavLink} to='/' style={({ isActive }) => { return { backgroundColor: isActive ? '' : '' } }} sx={{ color: 'white', textTransform: 'none', paddingRight:'20px',fontFamily:"'Girassol', cursive",fontSize:18}}>Home</Button>
-
-        
-          <Button component={NavLink} to='/todolist' style={({ isActive }) => { return { backgroundColor: isActive ? '' : '' } }} sx={{ color: 'white', textTransform: 'none' , paddingRight:'20px',fontFamily:"'Girassol', cursive",fontSize:18}} className='dim pointer'>ToDoList</Button>
-          
-          <Button component={NavLink} to='/contests' style={({ isActive }) => { return { backgroundColor: isActive ? '' : '' } }} sx={{ color: 'white', textTransform: 'none',paddingRight:'20px',fontFamily:"'Girassol', cursive" ,fontSize:18}} className='dim pointer'>Contests</Button>
-
-      
-          {isAuthenticated ? (
-            <Box sx={{display:'flex',justifyContent: 'flex-end',width:'100%'}}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-            <MenuItem  className='dim pointer' onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Log Out</MenuItem>
-      
-              </Menu>
-            </Box>
-          ):
-          <Box sx={{display:'flex',justifyContent: 'flex-end',width:'100%'}}>
-            <Button sx={btnProps} onClick={() => loginWithRedirect()} className='dim pointer'>Log In</Button>
-            </Box>
-
-          } */}
-
         </Toolbar>
       </AppBar>
     </Box>
