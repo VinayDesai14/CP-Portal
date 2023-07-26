@@ -79,7 +79,7 @@ function Problems(props) {
 }
 async function saveInLocal(name){
   localStorage.setItem(name,name);
-  alert("problem Saved locally");
+  console.log("problem Saved locally");
 }
 async function setData(name,link){
     const email=user.email;
@@ -90,12 +90,13 @@ async function setData(name,link){
       })
       .then(res=>{
         if(res.data==="exist"){
-            alert("Problem already saved");
+            console.log("Problem already saved");
           }
-        else if(res.data==="notexist"){
-          dispatch(save(name));
-          setSavedProblems([...savedproblems,name]);
-          localStorage.setItem(name, JSON.stringify(name));
+          else if(res.data==="notexist"){
+            dispatch(save(name));
+            setSavedProblems([...savedproblems,name]);
+            localStorage.setItem(name, JSON.stringify(name));
+            console.log("Problem saved successfully");
         }
       })
       .catch(e=>{
@@ -123,7 +124,7 @@ async function setData(name,link){
           dispatch(remove(name));
           
           
-            // alert("Problem removed successfully")
+            console.log("Problem removed successfully")
           }
         else if(res.data==="fail"){
           alert("Couldn't remove the problem")
